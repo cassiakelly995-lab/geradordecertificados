@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificado — Dia das Mulheres</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background:#1a0a14; font-family:'Montserrat',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:30px 16px; }
+h1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.8rem; color:#e8a0be; letter-spacing:2px; margin-bottom:4px; text-align:center; }
+.sub { font-size:0.65rem; color:#9b6b80; letter-spacing:4px; text-transform:uppercase; margin-bottom:28px; }
+.layout { display:flex; gap:24px; width:100%; max-width:1160px; align-items:flex-start; flex-wrap:wrap; justify-content:center; }
+.panel { background:#26101c; border:1px solid #4a1f35; border-radius:14px; padding:22px; width:280px; flex-shrink:0; }
+.panel h2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:#e8a0be; margin-bottom:14px; border-bottom:1px solid #4a1f35; padding-bottom:8px; }
+.field { margin-bottom:12px; }
+.field label { display:block; font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; color:#9b6b80; margin-bottom:4px; }
+.field input, .field textarea { width:100%; background:#1a0a14; border:1px solid #4a1f35; color:#f0d8e8; border-radius:7px; padding:8px 10px; font-family:'Montserrat',sans-serif; font-size:0.82rem; outline:none; transition:border-color 0.2s; }
+.field input:focus, .field textarea:focus { border-color:#c06090; }
+.field textarea { resize:vertical; min-height:58px; }
+.btn { width:100%; padding:11px; border-radius:8px; border:none; font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; cursor:pointer; margin-top:7px; transition:opacity 0.2s; }
+.btn:hover { opacity:0.85; }
+.btn:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-rose { background:linear-gradient(135deg,#c06090,#8b3560); color:#fff; }
+.btn-outline { background:transparent; border:1px solid #c06090; color:#e8a0be; }
+.btn-word { background:linear-gradient(135deg,#7b3f8c,#4a1f6a); color:#fff; }
+.ia-row { display:flex; gap:6px; margin-bottom:4px; }
+.ia-row input { flex:1; background:#1a0a14; border:1px solid #4a1f35; color:#f0d8e8; border-radius:7px; padding:8px 10px; font-family:'Montserrat',sans-serif; font-size:0.78rem; outline:none; }
+.ia-row input:focus { border-color:#c06090; }
+.ia-row button { background:linear-gradient(135deg,#c06090,#8b3560); color:#fff; border:none; border-radius:7px; padding:8px 12px; font-size:0.72rem; cursor:pointer; white-space:nowrap; font-family:'Montserrat',sans-serif; }
+#ia-status { font-size:0.68rem; color:#9b6b80; font-style:italic; min-height:16px; margin-top:3px; }
+hr { border-color:#4a1f35; margin:16px 0; }
+.cert-wrap { flex:1; min-width:640px; display:flex; flex-direction:column; align-items:center; gap:14px; }
+#certificate { width:800px; height:560px; position:relative; background:#fff9fb; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.5); }
+.cert-bg { position:absolute; inset:0; background:linear-gradient(160deg,#fff0f5 0%,#fff9fb 50%,#fce8f3 100%); }
+.corner-svg { position:absolute; width:160px; height:160px; }
+.corner-svg.tl{top:0;left:0} .corner-svg.tr{top:0;right:0;transform:scaleX(-1)} .corner-svg.bl{bottom:0;left:0;transform:scaleY(-1)} .corner-svg.br{bottom:0;right:0;transform:scale(-1,-1)}
+.cert-border { position:absolute; inset:22px; border:1px solid #d4799e; pointer-events:none; }
+.cert-border::before { content:''; position:absolute; inset:5px; border:1px dashed #e8b0cc; }
+.side-line { position:absolute; top:80px; bottom:80px; width:3px; background:linear-gradient(to bottom,transparent,#d4799e 20%,#d4799e 80%,transparent); }
+.side-line.left{left:38px} .side-line.right{right:38px}
+.cert-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:50px 80px; gap:7px; z-index:2; }
+.cert-flores { font-size:1.1rem; letter-spacing:6px; color:#c06090; }
+.cert-org { font-family:'Montserrat',sans-serif; font-size:0.6rem; letter-spacing:5px; text-transform:uppercase; color:#9b6b80; }
+.cert-divider { width:180px; height:1px; background:linear-gradient(to right,transparent,#d4799e,transparent); }
+.cert-dia { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.85rem; color:#c06090; letter-spacing:3px; }
+.cert-tipo { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:#6b1f45; letter-spacing:3px; text-align:center; line-height:1.1; }
+.cert-apresenta { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.9rem; color:#9b6b80; }
+.cert-nome { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:2.6rem; font-weight:300; color:#8b3560; border-bottom:1px solid #d4799e; padding:0 30px 5px; text-align:center; line-height:1.1; }
+.cert-desc { font-family:'Cormorant Garamond',serif; font-size:1rem; color:#5a2a40; text-align:center; max-width:500px; line-height:1.5; }
+.cert-data { font-family:'Montserrat',sans-serif; font-size:0.6rem; letter-spacing:3px; color:#9b6b80; text-transform:uppercase; }
+.cert-sigs { display:flex; gap:50px; margin-top:4px; }
+.cert-sig { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.cert-sig-nome { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.95rem; color:#6b1f45; border-top:1px solid #d4799e; padding-top:4px; min-width:130px; text-align:center; }
+.cert-sig-cargo { font-family:'Montserrat',sans-serif; font-size:0.55rem; letter-spacing:2px; text-transform:uppercase; color:#c06090; }
+</style>
+</head>
+<body>
+<h1>✿ Gerador de Certificados</h1>
+<div class="sub">8 de Março — Dia Internacional da Mulher</div>
+<div class="layout">
+  <div class="panel">
+    <h2>✿ Conteúdo</h2>
+    <div class="field"><label>Organização</label><input id="org" value="Instituto Casy" oninput="render()"></div>
+    <div class="field"><label>Tipo do Certificado</label><input id="tipo" value="CERTIFICADO DE RECONHECIMENTO" oninput="render()"></div>
+    <div class="field"><label>Nome</label><input id="nome" value="Ana Beatriz Santos" oninput="render()"></div>
+    <div class="field"><label>Descrição</label><textarea id="desc" oninput="render()">concluiu com excelência o curso de Liderança Feminina, com carga horária de 40 horas, demonstrando dedicação e brilhantismo.</textarea></div>
+    <div class="field"><label>Data</label><input id="data" value="Barueri, 8 de março de 2026" oninput="render()"></div>
+    <div class="field"><label>Assinatura 1</label><input id="s1n" value="Casy Kelly" oninput="render()"><input id="s1c" value="Diretora" oninput="render()" style="margin-top:4px"></div>
+    <div class="field"><label>Assinatura 2</label><input id="s2n" value="Maria Oliveira" oninput="render()"><input id="s2c" value="Coordenadora" oninput="render()" style="margin-top:4px"></div>
+    <hr>
+    <h2>✿ IA — Gerar Texto</h2>
+    <div class="ia-row"><input id="iaPrompt" placeholder="Ex: curso de Excel 20h"><button onclick="gerarIA()">✨ Gerar</button></div>
+    <div id="ia-status"></div>
+    <hr>
+    <button class="btn btn-word" id="btnWord" onclick="baixarWord()">📄 Baixar em Word (.docx)</button>
+    <button class="btn btn-rose" onclick="baixarImg()">🖼 Baixar Imagem</button>
+    <button class="btn btn-outline" onclick="imprimir()">🖨 Imprimir / PDF</button>
+  </div>
+
+  <div class="cert-wrap">
+    <div id="certificate">
+      <div class="cert-bg"></div>
+      <svg class="corner-svg tl" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><g opacity="0.55"><path d="M10,150 Q40,80 150,10" stroke="#c06090" stroke-width="1.2" fill="none"/><path d="M10,130 Q50,90 130,10" stroke="#d4799e" stroke-width="0.7" fill="none"/><circle cx="30" cy="115" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="30" cy="115" r="3.5" fill="#e8a0be"/><circle cx="60" cy="75" r="9" fill="#f9d0e4" opacity="0.8"/><circle cx="60" cy="75" r="4" fill="#e8a0be"/><circle cx="95" cy="42" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="95" cy="42" r="3" fill="#e8a0be"/><circle cx="125" cy="22" r="5" fill="#f9d0e4" opacity="0.7"/><circle cx="125" cy="22" r="2.5" fill="#e8a0be"/><ellipse cx="30" cy="108" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(-30,30,108)"/><ellipse cx="37" cy="115" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(40,37,115)"/><ellipse cx="23" cy="115" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(-70,23,115)"/><ellipse cx="60" cy="66" rx="6" ry="3.5" fill="#f9b8d2" opacity="0.6" transform="rotate(-20,60,66)"/><ellipse cx="69" cy="75" rx="6" ry="3.5" fill="#f9b8d2" opacity="0.6" transform="rotate(50,69,75)"/><ellipse cx="51" cy="75" rx="6" ry="3.5" fill="#f9b8d2" opacity="0.6" transform="rotate(-70,51,75)"/><ellipse cx="45" cy="90" rx="8" ry="3" fill="#c8a0b8" opacity="0.4" transform="rotate(45,45,90)"/><ellipse cx="80" cy="58" rx="8" ry="3" fill="#c8a0b8" opacity="0.4" transform="rotate(35,80,58)"/><ellipse cx="112" cy="30" rx="7" ry="2.5" fill="#c8a0b8" opacity="0.4" transform="rotate(40,112,30)"/></g></svg>
+      <svg class="corner-svg tr" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><g opacity="0.55"><path d="M10,150 Q40,80 150,10" stroke="#c06090" stroke-width="1.2" fill="none"/><path d="M10,130 Q50,90 130,10" stroke="#d4799e" stroke-width="0.7" fill="none"/><circle cx="30" cy="115" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="30" cy="115" r="3.5" fill="#e8a0be"/><circle cx="60" cy="75" r="9" fill="#f9d0e4" opacity="0.8"/><circle cx="60" cy="75" r="4" fill="#e8a0be"/><circle cx="95" cy="42" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="95" cy="42" r="3" fill="#e8a0be"/><ellipse cx="30" cy="108" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(-30,30,108)"/><ellipse cx="37" cy="115" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(40,37,115)"/><ellipse cx="60" cy="66" rx="6" ry="3.5" fill="#f9b8d2" opacity="0.6" transform="rotate(-20,60,66)"/><ellipse cx="69" cy="75" rx="6" ry="3.5" fill="#f9b8d2" opacity="0.6" transform="rotate(50,69,75)"/><ellipse cx="45" cy="90" rx="8" ry="3" fill="#c8a0b8" opacity="0.4" transform="rotate(45,45,90)"/></g></svg>
+      <svg class="corner-svg bl" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><g opacity="0.55"><path d="M10,150 Q40,80 150,10" stroke="#c06090" stroke-width="1.2" fill="none"/><path d="M10,130 Q50,90 130,10" stroke="#d4799e" stroke-width="0.7" fill="none"/><circle cx="30" cy="115" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="30" cy="115" r="3.5" fill="#e8a0be"/><circle cx="60" cy="75" r="9" fill="#f9d0e4" opacity="0.8"/><circle cx="60" cy="75" r="4" fill="#e8a0be"/><circle cx="95" cy="42" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="95" cy="42" r="3" fill="#e8a0be"/><ellipse cx="30" cy="108" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(-30,30,108)"/><ellipse cx="37" cy="115" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(40,37,115)"/><ellipse cx="45" cy="90" rx="8" ry="3" fill="#c8a0b8" opacity="0.4" transform="rotate(45,45,90)"/></g></svg>
+      <svg class="corner-svg br" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><g opacity="0.55"><path d="M10,150 Q40,80 150,10" stroke="#c06090" stroke-width="1.2" fill="none"/><path d="M10,130 Q50,90 130,10" stroke="#d4799e" stroke-width="0.7" fill="none"/><circle cx="30" cy="115" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="30" cy="115" r="3.5" fill="#e8a0be"/><circle cx="60" cy="75" r="9" fill="#f9d0e4" opacity="0.8"/><circle cx="60" cy="75" r="4" fill="#e8a0be"/><circle cx="95" cy="42" r="7" fill="#f7c0d8" opacity="0.8"/><circle cx="95" cy="42" r="3" fill="#e8a0be"/><ellipse cx="30" cy="108" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(-30,30,108)"/><ellipse cx="37" cy="115" rx="5" ry="3" fill="#f9b8d2" opacity="0.6" transform="rotate(40,37,115)"/><ellipse cx="45" cy="90" rx="8" ry="3" fill="#c8a0b8" opacity="0.4" transform="rotate(45,45,90)"/></g></svg>
+      <div class="cert-border"></div>
+      <div class="side-line left"></div>
+      <div class="side-line right"></div>
+      <div class="cert-content">
+        <div class="cert-flores">🌸 ✿ 🌷 ✿ 🌸</div>
+        <div class="cert-org" id="r-org">Instituto Casy</div>
+        <div class="cert-divider"></div>
+        <div class="cert-dia">8 de Março — Dia Internacional da Mulher</div>
+        <div class="cert-tipo" id="r-tipo">CERTIFICADO DE RECONHECIMENTO</div>
+        <div class="cert-apresenta">Certificamos com orgulho que</div>
+        <div class="cert-nome" id="r-nome">Ana Beatriz Santos</div>
+        <div class="cert-desc" id="r-desc">concluiu com excelência o curso de Liderança Feminina, com carga horária de 40 horas, demonstrando dedicação e brilhantismo.</div>
+        <div class="cert-data" id="r-data">Barueri, 8 de março de 2026</div>
+        <div class="cert-sigs">
+          <div class="cert-sig"><div class="cert-sig-nome" id="r-s1n">Casy Kelly</div><div class="cert-sig-cargo" id="r-s1c">Diretora</div></div>
+          <div class="cert-sig"><div class="cert-sig-nome" id="r-s2n">Maria Oliveira</div><div class="cert-sig-cargo" id="r-s2c">Coordenadora</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+function g(id){ return document.getElementById(id); }
+
+function render(){
+  g('r-org').textContent  = g('org').value;
+  g('r-tipo').textContent = g('tipo').value;
+  g('r-nome').textContent = g('nome').value;
+  g('r-desc').textContent = g('desc').value;
+  g('r-data').textContent = g('data').value;
+  g('r-s1n').textContent  = g('s1n').value;
+  g('r-s1c').textContent  = g('s1c').value;
+  g('r-s2n').textContent  = g('s2n').value;
+  g('r-s2c').textContent  = g('s2c').value;
+}
+
+async function gerarIA(){
+  const prompt = g('iaPrompt').value.trim();
+  if(!prompt) return;
+  g('ia-status').textContent = '✨ Gerando...';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:300,
+        messages:[{role:'user',content:`Escreva um texto curto e elegante para descrição de um certificado do Dia das Mulheres sobre: "${prompt}". Máximo 2 linhas, tom inspirador e feminino. Responda SOMENTE o texto, sem aspas.`}]
+      })
+    });
+    const data = await res.json();
+    const texto = data.content?.[0]?.text?.trim();
+    if(texto){ g('desc').value = texto; render(); g('ia-status').textContent = '✅ Pronto!'; }
+    else g('ia-status').textContent = '⚠️ Tente novamente.';
+  } catch(e){ g('ia-status').textContent = '❌ Erro.'; }
+  setTimeout(()=> g('ia-status').textContent = '', 3000);
+}
+
+function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function par(text, o){
+  o = o||{};
+  const sz = o.sz||24, color = o.color||'6B1F45';
+  const bold = o.bold?'<w:b/>':'', ital = o.ital?'<w:i/>':'';
+  const before = o.before||0, after = o.after!==undefined?o.after:80;
+  const shading = o.shading?`<w:shd w:val="clear" w:color="auto" w:fill="${o.shading}"/>`:'';
+  const bdrB = o.bdrB?`<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="4" w:color="D4799E"/></w:pBdr>`:'';
+  const bdrT = o.bdrT?`<w:pBdr><w:top w:val="single" w:sz="6" w:space="1" w:color="C06090"/></w:pBdr>`:'';
+  return `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="${before}" w:after="${after}"/>${shading}${bdrB}${bdrT}</w:pPr><w:r><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:color w:val="${color}"/>${bold}${ital}</w:rPr><w:t xml:space="preserve">${esc(text)}</w:t></w:r></w:p>`;
+}
+
+function sep(){ return par('- \u2736 ---------------------------------- \u2736 -',{sz:20,color:'D4799E',before:60,after:60}); }
+function sp(){ return `<w:p><w:pPr><w:spacing w:before="0" w:after="80"/></w:pPr></w:p>`; }
+
+function sigs(n1,c1,n2,c2){
+  const cell = (name, cargo, last) => `<w:tc><w:tcPr><w:tcW w:w="5500" w:type="dxa"/><w:tcBorders><w:bottom w:val="${last?'none':'single'}" w:sz="4" w:space="1" w:color="D4799E"/><w:top w:val="none"/><w:left w:val="none"/><w:right w:val="none"/></w:tcBorders><w:tcMar><w:top w:w="60" w:type="dxa"/><w:bottom w:w="60" w:type="dxa"/><w:left w:w="400" w:type="dxa"/><w:right w:w="400" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="${last?18:24}"/><w:szCs w:val="${last?18:24}"/><w:color w:val="${last?'C06090':'6B1F45'}"/>${last?'<w:b/>':'<w:i/>'}</w:rPr><w:t>${esc(last?cargo.toUpperCase():name)}</w:t></w:r></w:p></w:tc>`;
+  const noB = `<w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="11000" w:type="dxa"/>${noB}</w:tblPr>
+  <w:tr>${cell(n1,c1,false)}${cell(n2,c2,false)}</w:tr>
+  <w:tr>${cell('',c1,true)}${cell('',c2,true)}</w:tr></w:tbl>`;
+}
+
+async function baixarWord(){
+  const btn = g('btnWord');
+  btn.disabled = true; btn.textContent = '⏳ Gerando...';
+  try {
+    const d = {
+      org:g('org').value, tipo:g('tipo').value, nome:g('nome').value,
+      desc:g('desc').value, data:g('data').value,
+      s1n:g('s1n').value, s1c:g('s1c').value,
+      s2n:g('s2n').value, s2c:g('s2c').value
+    };
+
+    const docXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+<w:body>
+${par('🌸  ✿  🌷  8 DE MARCO - DIA INTERNACIONAL DA MULHER  🌷  ✿  🌸',{sz:20,color:'6B1F45',bold:true,ital:true,shading:'FCE4EC',before:200,after:200})}
+${sp()}
+${par('🌸  ✿  🌷  ✿  🌸',{sz:28,color:'C06090',before:0,after:60})}
+${par(d.org,{sz:20,color:'9B6B80',before:0,after:60})}
+${sep()}
+${par('8 de Marco - Dia Internacional da Mulher',{sz:22,color:'C06090',ital:true,before:0,after:60})}
+${par(d.tipo,{sz:56,color:'6B1F45',bold:true,before:0,after:80})}
+${par('Certificamos com orgulho que',{sz:26,color:'9B6B80',ital:true,before:0,after:80})}
+${par(d.nome,{sz:72,color:'8B3560',ital:true,bdrB:true,before:0,after:80})}
+${sp()}
+${par(d.desc,{sz:26,color:'5A2A40',ital:true,before:0,after:60})}
+${sep()}
+${par(d.data,{sz:20,color:'9B6B80',ital:true,before:0,after:100})}
+${sigs(d.s1n,d.s1c,d.s2n,d.s2c)}
+${sp()}
+${par('🌸  Celebrando a forca, a beleza e a conquista de cada mulher  🌸',{sz:20,color:'6B1F45',ital:true,bdrT:true,before:100,after:100,shading:'FCE4EC'})}
+<w:sectPr>
+  <w:pgSz w:w="15840" w:h="12240" w:orient="landscape"/>
+  <w:pgMar w:top="720" w:right="800" w:bottom="720" w:left="800" w:header="0" w:footer="0"/>
+  <w:pgBorders w:offsetFrom="page">
+    <w:top w:val="double" w:sz="18" w:space="20" w:color="C06090"/>
+    <w:left w:val="double" w:sz="18" w:space="20" w:color="C06090"/>
+    <w:bottom w:val="double" w:sz="18" w:space="20" w:color="C06090"/>
+    <w:right w:val="double" w:sz="18" w:space="20" w:color="C06090"/>
+  </w:pgBorders>
+</w:sectPr>
+</w:body></w:document>`;
+
+    const zip = new JSZip();
+    zip.file('[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>`);
+    zip.folder('_rels').file('.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`);
+    zip.folder('word').folder('_rels').file('document.xml.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/></Relationships>`);
+    zip.folder('word').file('settings.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:defaultTabStop w:val="720"/></w:settings>`);
+    zip.folder('word').file('styles.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>`);
+    zip.folder('word').file('document.xml', docXml);
+
+    const blob = await zip.generateAsync({type:'blob', mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'certificado_dia_das_mulheres.docx'; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url), 1000);
+  } catch(e) {
+    alert('Erro ao gerar Word: ' + e.message);
+    console.error(e);
+  }
+  btn.disabled = false; btn.textContent = '📄 Baixar em Word (.docx)';
+}
+
+function baixarImg(){
+  html2canvas(g('certificate'),{scale:2,useCORS:true}).then(canvas=>{
+    const a = document.createElement('a'); a.download='certificado_dia_das_mulheres.png'; a.href=canvas.toDataURL('image/png'); a.click();
+  });
+}
+
+function imprimir(){
+  html2canvas(g('certificate'),{scale:2}).then(canvas=>{
+    const w=window.open('','_blank');
+    w.document.write(`<html><head><title>Certificado</title><style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#fff}img{max-width:100%}</style></head><body><img src="${canvas.toDataURL()}" onload="window.print()"></body></html>`);
+    w.document.close();
+  });
+}
+
+render();
+</script>
+</body>
+</html>
