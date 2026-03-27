@@ -10,133 +10,107 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#1c1c1c;font-family:'EB Garamond',serif;display:flex;flex-direction:column;align-items:center;padding:28px 16px;min-height:100vh}
-h1{font-family:'Cinzel',serif;font-size:1rem;color:#c8a96e;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;text-align:center}
+h1{font-family:'Cinzel',serif;font-size:1rem;color:#d4799e;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;text-align:center}
 
-/* === PAINEL EDITOR === */
-.editor{background:#111;border:1px solid #333;border-radius:12px;padding:20px 22px;width:100%;max-width:960px;margin-bottom:24px}
-.editor-title{font-family:'Cinzel',serif;font-size:0.72rem;color:#c8a96e;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:16px}
+.editor{background:#111;border:1px solid #333;border-radius:12px;padding:20px 22px;width:100%;max-width:980px;margin-bottom:24px}
+.editor-title{font-family:'Cinzel',serif;font-size:0.72rem;color:#d4799e;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:16px}
 .row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
 .ef{display:flex;flex-direction:column;gap:4px;flex:1;min-width:200px}
 .ef.wide{flex:2;min-width:360px}
 .ef label{font-size:0.58rem;letter-spacing:2px;text-transform:uppercase;color:#666}
 .ef input,.ef textarea{background:#1a1a1a;border:1px solid #3a3a3a;color:#e8dcc8;border-radius:6px;padding:7px 10px;font-family:'EB Garamond',serif;font-size:1rem;outline:none;transition:border-color 0.2s;width:100%}
-.ef input:focus,.ef textarea:focus{border-color:#c8a96e}
+.ef input:focus,.ef textarea:focus{border-color:#d4799e}
 .ef textarea{resize:vertical;min-height:60px;line-height:1.5}
 .btns{display:flex;gap:10px;flex-wrap:wrap;padding-top:4px}
 .btn{padding:10px 24px;border-radius:7px;border:none;font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:2px;cursor:pointer;transition:opacity 0.2s;text-transform:uppercase;font-weight:600}
 .btn:hover{opacity:0.82}
 .btn:disabled{opacity:0.45;cursor:not-allowed}
-.btn-gold{background:linear-gradient(135deg,#c8a96e,#8a6030);color:#fff}
+.btn-rose{background:linear-gradient(135deg,#c06090,#8b3560);color:#fff}
 .btn-green{background:linear-gradient(135deg,#5a8a5a,#2a5a2a);color:#fff}
-.btn-outline{background:transparent;border:1px solid #c8a96e;color:#c8a96e}
+.btn-outline{background:transparent;border:1px solid #d4799e;color:#d4799e}
 
-/* === CONVITE === */
-.wrap{width:100%;max-width:960px;display:flex;justify-content:center;overflow-x:auto}
+.wrap{width:100%;max-width:980px;display:flex;justify-content:center;overflow-x:auto}
 
 #convite{
   width:960px;height:672px;
-  background:#f6f4ef;
+  background:#fdfaf6;
   position:relative;
   overflow:hidden;
   box-shadow:0 24px 80px rgba(0,0,0,0.7);
   flex-shrink:0;
 }
+.bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#fffcf8 0%,#f7efe8 100%)}
+#borderCanvas{position:absolute;inset:0;z-index:1;pointer-events:none}
 
-.bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#fdfbf6 0%,#ece8de 100%)}
-
-/* === BORDA ORNAMENTAL === */
-/* Linhas duplas */
-.bline{position:absolute;background:#222}
-.bline.top   {top:18px;left:18px;right:18px;height:2px}
-.bline.top2  {top:22px;left:18px;right:18px;height:1px;background:#555}
-.bline.bot   {bottom:18px;left:18px;right:18px;height:2px}
-.bline.bot2  {bottom:22px;left:18px;right:18px;height:1px;background:#555}
-.bline.lft   {left:18px;top:18px;bottom:18px;width:2px}
-.bline.lft2  {left:22px;top:18px;bottom:18px;width:1px;background:#555}
-.bline.rgt   {right:18px;top:18px;bottom:18px;width:2px}
-.bline.rgt2  {right:22px;top:18px;bottom:18px;width:1px;background:#555}
-
-/* Ornamentos nos cantos e no centro das bordas — SVG inline */
-.orn{position:absolute;z-index:3}
-.orn-tl{top:6px;left:6px}
-.orn-tr{top:6px;right:6px;transform:scaleX(-1)}
-.orn-bl{bottom:6px;left:6px;transform:scaleY(-1)}
-.orn-br{bottom:6px;right:6px;transform:scale(-1,-1)}
-.orn-tc{top:4px;left:50%;transform:translateX(-50%)}
-.orn-bc{bottom:4px;left:50%;transform:translateX(-50%)}
-.orn-lc{left:4px;top:50%;transform:translateY(-50%)}
-.orn-rc{right:4px;top:50%;transform:translateY(-50%)}
-
-/* Linha horizontal divisória interna */
-.hdiv{position:absolute;left:60px;right:60px;height:1px;background:linear-gradient(to right,transparent,#888 20%,#888 80%,transparent)}
-
-/* Conteúdo */
 .inv{
   position:absolute;inset:0;z-index:2;
   display:flex;flex-direction:column;
   align-items:center;
-  padding:44px 100px 36px;
-  gap:0;
+  padding:52px 105px 36px;
 }
-
-/* Logo OAB */
-.logo-area{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-.oab-svg{flex-shrink:0}
-.logo-divider{width:1px;height:52px;background:#2a3540;opacity:0.5}
-.logo-text{display:flex;flex-direction:column;gap:1px}
-.logo-subsecao{font-family:'EB Garamond',serif;font-size:0.78rem;color:#2a3540;line-height:1.35;font-weight:400}
-.logo-comissao{font-family:'EB Garamond',serif;font-size:0.78rem;color:#2a3540;line-height:1.35;font-weight:600}
-.logo-sp{font-family:'Cinzel',serif;font-size:0.62rem;color:#2a3540;letter-spacing:3px;margin-top:4px}
-
-/* Textos */
-.intro{font-family:'EB Garamond',serif;font-size:1.05rem;color:#2a3540;text-align:center;line-height:1.7;margin-bottom:12px}
-.nome-dest{font-family:'Cinzel',serif;font-size:1.45rem;color:#1a1a1a;text-align:center;letter-spacing:2px;font-weight:600;margin-bottom:10px;line-height:1.2}
-.cargo{font-family:'EB Garamond',serif;font-size:1.05rem;color:#2a3540;text-align:center;line-height:1.6;font-style:italic;margin-bottom:10px}
-.evento{font-family:'Cinzel',serif;font-size:1.3rem;color:#1a1a1a;text-align:center;letter-spacing:3px;font-weight:600;margin-bottom:10px}
-.detalhes{font-family:'EB Garamond',serif;font-size:1rem;color:#2a3540;text-align:center;line-height:1.7;margin-bottom:8px}
-.endereco{font-family:'EB Garamond',serif;font-size:0.82rem;color:#555;text-align:center;line-height:1.5;margin-top:4px}
-
-/* linha decorativa tênue */
-.thin-rule{width:340px;height:1px;background:linear-gradient(to right,transparent,#aaa 30%,#aaa 70%,transparent);margin:6px auto}
+.logo-area{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.logo-divider{width:1px;height:52px;background:#2a3540;opacity:0.4}
+.logo-text{display:flex;flex-direction:column;gap:2px}
+.logo-sub{font-family:'EB Garamond',serif;font-size:0.77rem;color:#2a3540;line-height:1.35}
+.logo-com{font-family:'EB Garamond',serif;font-size:0.77rem;color:#2a3540;line-height:1.35;font-weight:600}
+.thin-rule{width:400px;height:1px;background:linear-gradient(to right,transparent,#c06090 30%,#c06090 70%,transparent);margin:5px auto}
+.intro{font-family:'EB Garamond',serif;font-size:1.04rem;color:#2a3540;text-align:center;line-height:1.75;margin:8px 0}
+.nome{font-family:'Cinzel',serif;font-size:1.38rem;color:#111;text-align:center;letter-spacing:1.5px;font-weight:600;margin:6px 0;line-height:1.25}
+.cargo{font-family:'EB Garamond',serif;font-size:1.03rem;color:#2a3540;text-align:center;line-height:1.65;font-style:italic;margin:4px 0}
+.evento{font-family:'Cinzel',serif;font-size:1.26rem;color:#111;text-align:center;letter-spacing:2.5px;font-weight:600;margin:6px 0}
+.detalhes{font-family:'EB Garamond',serif;font-size:0.97rem;color:#2a3540;text-align:center;line-height:1.75;margin:6px 0}
+.endereco{font-family:'EB Garamond',serif;font-size:0.79rem;color:#666;text-align:center;line-height:1.5;margin-top:4px}
 </style>
 </head>
 <body>
-<h1>✦ Gerador de Convite — OAB</h1>
+<h1>✿ Gerador de Convite — OAB</h1>
 
 <div class="editor">
-  <div class="editor-title">✦ Editar Conteúdo</div>
+  <div class="editor-title">✿ Editar Conteúdo</div>
   <div class="row">
-    <div class="ef"><label>Subseção</label><input id="f-subsecao" value="Subseção Santana de Parnaíba" oninput="render()"></div>
-    <div class="ef"><label>Comissão</label><input id="f-comissao" value="Comissão das Mulheres Advogadas" oninput="render()"></div>
-    <div class="ef"><label>Cidade (logo)</label><input id="f-cidade-logo" value="SÃO PAULO" oninput="render()"></div>
+    <div class="ef"><label>Subseção</label><input id="f-sub" value="Subseção Santana de Parnaíba" oninput="render()"></div>
+    <div class="ef"><label>Comissão</label><input id="f-com" value="Comissão das Mulheres Advogadas" oninput="render()"></div>
+    <div class="ef"><label>Cidade (logo)</label><input id="f-cidade" value="SÃO PAULO" oninput="render()"></div>
   </div>
   <div class="row">
-    <div class="ef wide"><label>Texto de Abertura</label><textarea id="f-abertura" oninput="render()">A Ordem dos Advogados do Brasil,
+    <div class="ef wide"><label>Texto de Abertura</label>
+      <textarea id="f-abertura" oninput="render()">A Ordem dos Advogados do Brasil,
 247ª Subseção de Santana de Parnaíba,
 por meio de sua Diretoria e da Comissão das Mulheres Advogadas,
-tem a elevada honra de convidar</textarea></div>
+tem a elevada honra de convidar</textarea>
+    </div>
   </div>
   <div class="row">
-    <div class="ef wide"><label>Nome da Homenageada</label><input id="f-nome" value="ILMA. SRA. DRA. NATALIA RODRIGUES LOPES" oninput="render()"></div>
+    <div class="ef wide"><label>Nome da Homenageada</label>
+      <input id="f-nome" value="ILMA. SRA. DRA. NATALIA RODRIGUES LOPES" oninput="render()">
+    </div>
   </div>
   <div class="row">
-    <div class="ef wide"><label>Cargo / Função</label><textarea id="f-cargo" oninput="render()">Presidente da Comissão da Jovem Advocacia
-para ser homenageada em comemoração ao</textarea></div>
+    <div class="ef wide"><label>Cargo / Texto após o nome</label>
+      <textarea id="f-cargo" oninput="render()">Presidente da Comissão da Jovem Advocacia
+para ser homenageada em comemoração ao</textarea>
+    </div>
   </div>
   <div class="row">
-    <div class="ef"><label>Título do Evento</label><input id="f-evento" value="DIA INTERNACIONAL DA MULHER" oninput="render()"></div>
+    <div class="ef"><label>Título do Evento</label>
+      <input id="f-evento" value="DIA INTERNACIONAL DA MULHER" oninput="render()">
+    </div>
   </div>
   <div class="row">
-    <div class="ef wide"><label>Data / Local / Detalhes</label><textarea id="f-detalhes" oninput="render()">A realizar-se no dia 31 de março de 2026, às 15h,
+    <div class="ef wide"><label>Data / Local / Detalhes</label>
+      <textarea id="f-detalhes" oninput="render()">A realizar-se no dia 31 de março de 2026, às 15h,
 na sede da OAB Santana de Parnaíba.
 Após a solenidade, será oferecido um café especial, como forma de
-celebração, integração e reconhecimento.</textarea></div>
+celebração, integração e reconhecimento.</textarea>
+    </div>
   </div>
   <div class="row">
-    <div class="ef wide"><label>Endereço</label><input id="f-endereco" value="Endereço: Rua Alberto Frediani, 770 – Jardim Frediani – Santana de Parnaíba – CEP 06502-155" oninput="render()"></div>
+    <div class="ef wide"><label>Endereço</label>
+      <input id="f-end" value="Endereço: Rua Alberto Frediani, 770 – Jardim Frediani – Santana de Parnaíba – CEP 06502-155" oninput="render()">
+    </div>
   </div>
   <div class="btns">
-    <button class="btn btn-gold" id="btnWord" onclick="baixarWord()">📄 Baixar Word (.docx)</button>
+    <button class="btn btn-rose" id="btnWord" onclick="baixarWord()">📄 Baixar Word (.docx)</button>
     <button class="btn btn-green" onclick="baixarImg()">🖼 Baixar Imagem (.png)</button>
     <button class="btn btn-outline" onclick="imprimir()">🖨 Imprimir / PDF</button>
   </div>
@@ -145,326 +119,293 @@ celebração, integração e reconhecimento.</textarea></div>
 <div class="wrap">
   <div id="convite">
     <div class="bg"></div>
-
-    <!-- Linhas de borda -->
-    <div class="bline top"></div><div class="bline top2"></div>
-    <div class="bline bot"></div><div class="bline bot2"></div>
-    <div class="bline lft"></div><div class="bline lft2"></div>
-    <div class="bline rgt"></div><div class="bline rgt2"></div>
-
-    <!-- Ornamentos nos cantos -->
-    <svg class="orn orn-tl" width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a1a1a" opacity="0.85">
-        <!-- espiral de canto -->
-        <path d="M8,64 C8,40 24,16 64,8" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-        <!-- flor central -->
-        <circle cx="22" cy="50" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.2"/>
-        <circle cx="22" cy="50" r="3" fill="#1a1a1a"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(0,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(45,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(90,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(135,22,50)"/>
-        <!-- folhas arabesco -->
-        <path d="M8,36 C12,28 20,24 28,28 C22,32 14,34 8,36Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M36,8 C28,12 24,20 28,28 C32,22 34,14 36,8Z" fill="#1a1a1a" opacity="0.55"/>
-        <!-- volutas -->
-        <path d="M8,20 C10,18 13,17 14,19 C15,21 13,23 11,22" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <path d="M20,8 C18,10 17,13 19,14 C21,15 23,13 22,11" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <!-- pontos decorativos -->
-        <circle cx="42" cy="16" r="2" fill="#1a1a1a" opacity="0.6"/>
-        <circle cx="16" cy="42" r="2" fill="#1a1a1a" opacity="0.6"/>
-        <circle cx="54" cy="11" r="1.5" fill="#1a1a1a" opacity="0.5"/>
-        <circle cx="11" cy="54" r="1.5" fill="#1a1a1a" opacity="0.5"/>
-      </g>
-    </svg>
-    <svg class="orn orn-tr" width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a1a1a" opacity="0.85">
-        <path d="M8,64 C8,40 24,16 64,8" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-        <circle cx="22" cy="50" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.2"/>
-        <circle cx="22" cy="50" r="3" fill="#1a1a1a"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(0,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(45,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(90,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(135,22,50)"/>
-        <path d="M8,36 C12,28 20,24 28,28 C22,32 14,34 8,36Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M36,8 C28,12 24,20 28,28 C32,22 34,14 36,8Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M8,20 C10,18 13,17 14,19 C15,21 13,23 11,22" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <path d="M20,8 C18,10 17,13 19,14 C21,15 23,13 22,11" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <circle cx="42" cy="16" r="2" fill="#1a1a1a" opacity="0.6"/>
-        <circle cx="16" cy="42" r="2" fill="#1a1a1a" opacity="0.6"/>
-        <circle cx="54" cy="11" r="1.5" fill="#1a1a1a" opacity="0.5"/>
-        <circle cx="11" cy="54" r="1.5" fill="#1a1a1a" opacity="0.5"/>
-      </g>
-    </svg>
-    <svg class="orn orn-bl" width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a1a1a" opacity="0.85">
-        <path d="M8,64 C8,40 24,16 64,8" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-        <circle cx="22" cy="50" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.2"/>
-        <circle cx="22" cy="50" r="3" fill="#1a1a1a"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(0,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(45,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(90,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(135,22,50)"/>
-        <path d="M8,36 C12,28 20,24 28,28 C22,32 14,34 8,36Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M36,8 C28,12 24,20 28,28 C32,22 34,14 36,8Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M8,20 C10,18 13,17 14,19 C15,21 13,23 11,22" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <path d="M20,8 C18,10 17,13 19,14 C21,15 23,13 22,11" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <circle cx="42" cy="16" r="2" fill="#1a1a1a" opacity="0.6"/>
-        <circle cx="16" cy="42" r="2" fill="#1a1a1a" opacity="0.6"/>
-      </g>
-    </svg>
-    <svg class="orn orn-br" width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a1a1a" opacity="0.85">
-        <path d="M8,64 C8,40 24,16 64,8" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
-        <circle cx="22" cy="50" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.2"/>
-        <circle cx="22" cy="50" r="3" fill="#1a1a1a"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(0,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(45,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(90,22,50)"/>
-        <ellipse cx="22" cy="43" rx="2.5" ry="5" fill="#1a1a1a" opacity="0.7" transform="rotate(135,22,50)"/>
-        <path d="M8,36 C12,28 20,24 28,28 C22,32 14,34 8,36Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M36,8 C28,12 24,20 28,28 C32,22 34,14 36,8Z" fill="#1a1a1a" opacity="0.55"/>
-        <path d="M8,20 C10,18 13,17 14,19 C15,21 13,23 11,22" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <path d="M20,8 C18,10 17,13 19,14 C21,15 23,13 22,11" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-        <circle cx="42" cy="16" r="2" fill="#1a1a1a" opacity="0.6"/>
-        <circle cx="16" cy="42" r="2" fill="#1a1a1a" opacity="0.6"/>
-      </g>
-    </svg>
-
-    <!-- Ornamento centro topo -->
-    <svg class="orn orn-tc" width="120" height="28" viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#1a1a1a" fill="none" opacity="0.8">
-        <line x1="0" y1="14" x2="40" y2="14" stroke-width="1.5"/>
-        <line x1="80" y1="14" x2="120" y2="14" stroke-width="1.5"/>
-        <circle cx="60" cy="14" r="5" fill="#1a1a1a" stroke="none"/>
-        <circle cx="45" cy="14" r="2.5" fill="#1a1a1a" stroke="none"/>
-        <circle cx="75" cy="14" r="2.5" fill="#1a1a1a" stroke="none"/>
-        <path d="M55,14 C55,8 57,5 60,5 C63,5 65,8 65,14" fill="#1a1a1a" opacity="0.7"/>
-        <path d="M55,14 C55,20 57,23 60,23 C63,23 65,20 65,14" fill="#1a1a1a" opacity="0.5"/>
-      </g>
-    </svg>
-
-    <!-- Ornamento centro base -->
-    <svg class="orn orn-bc" width="120" height="28" viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#1a1a1a" fill="none" opacity="0.8">
-        <line x1="0" y1="14" x2="40" y2="14" stroke-width="1.5"/>
-        <line x1="80" y1="14" x2="120" y2="14" stroke-width="1.5"/>
-        <circle cx="60" cy="14" r="5" fill="#1a1a1a" stroke="none"/>
-        <circle cx="45" cy="14" r="2.5" fill="#1a1a1a" stroke="none"/>
-        <circle cx="75" cy="14" r="2.5" fill="#1a1a1a" stroke="none"/>
-        <!-- flor de lis -->
-        <path d="M58,9 C58,6 59,4 60,4 C61,4 62,6 62,9 L60,11 Z" fill="#1a1a1a"/>
-        <path d="M55,12 C52,11 50,12 50,14 C50,16 52,16 55,15 L60,14 Z" fill="#1a1a1a" opacity="0.8"/>
-        <path d="M65,12 C68,11 70,12 70,14 C70,16 68,16 65,15 L60,14 Z" fill="#1a1a1a" opacity="0.8"/>
-        <path d="M60,14 L60,22" stroke="#1a1a1a" stroke-width="1.5"/>
-        <path d="M57,19 C58,18 60,18 60,22 C60,18 62,18 63,19" stroke="#1a1a1a" stroke-width="1" fill="none"/>
-      </g>
-    </svg>
-
-    <!-- Ornamentos laterais -->
-    <svg class="orn orn-lc" width="28" height="80" viewBox="0 0 28 80" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a1a1a" opacity="0.8">
-        <line x1="14" y1="0" x2="14" y2="28" stroke="#1a1a1a" stroke-width="1.5"/>
-        <line x1="14" y1="52" x2="14" y2="80" stroke="#1a1a1a" stroke-width="1.5"/>
-        <circle cx="14" cy="40" r="6" fill="#1a1a1a"/>
-        <circle cx="14" cy="28" r="3" fill="#1a1a1a"/>
-        <circle cx="14" cy="52" r="3" fill="#1a1a1a"/>
-        <ellipse cx="14" cy="40" rx="10" ry="4" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.5"/>
-      </g>
-    </svg>
-    <svg class="orn orn-rc" width="28" height="80" viewBox="0 0 28 80" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a1a1a" opacity="0.8">
-        <line x1="14" y1="0" x2="14" y2="28" stroke="#1a1a1a" stroke-width="1.5"/>
-        <line x1="14" y1="52" x2="14" y2="80" stroke="#1a1a1a" stroke-width="1.5"/>
-        <circle cx="14" cy="40" r="6" fill="#1a1a1a"/>
-        <circle cx="14" cy="28" r="3" fill="#1a1a1a"/>
-        <circle cx="14" cy="52" r="3" fill="#1a1a1a"/>
-        <ellipse cx="14" cy="40" rx="10" ry="4" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.5"/>
-      </g>
-    </svg>
-
-    <!-- Conteúdo do convite -->
+    <canvas id="borderCanvas" width="960" height="672"></canvas>
     <div class="inv">
-      <!-- Logo OAB -->
       <div class="logo-area">
-        <!-- Logo OAB SVG recreado -->
-        <svg class="oab-svg" width="68" height="68" viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="34" cy="34" r="32" fill="#2a3540"/>
-          <text x="34" y="30" font-family="Georgia,serif" font-size="16" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">OAB</text>
-          <text x="34" y="48" font-family="Georgia,serif" font-size="7.5" fill="white" text-anchor="middle">SÃO PAULO</text>
+        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" fill="#2a3540"/>
+          <text x="32" y="28" font-family="Georgia,serif" font-size="14" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">OAB</text>
+          <text x="32" y="45" font-family="Georgia,serif" font-size="6.5" fill="white" text-anchor="middle" id="r-cidade">SÃO PAULO</text>
         </svg>
         <div class="logo-divider"></div>
         <div class="logo-text">
-          <span class="logo-subsecao" id="r-subsecao">Subseção<br>Santana de Parnaíba</span>
-          <span style="display:block;width:160px;height:1px;background:#2a3540;opacity:0.3;margin:3px 0"></span>
-          <span class="logo-comissao" id="r-comissao">Comissão das<br>Mulheres Advogadas</span>
+          <span class="logo-sub" id="r-sub"></span>
+          <span style="display:block;height:3px"></span>
+          <span class="logo-com" id="r-com"></span>
         </div>
       </div>
-
       <div class="thin-rule"></div>
-
-      <div class="intro" id="r-abertura" style="margin-top:10px"></div>
-
-      <div class="thin-rule" style="margin:10px auto"></div>
-
-      <div class="nome-dest" id="r-nome"></div>
-
-      <div class="cargo" id="r-cargo" style="margin-top:4px"></div>
-
-      <div class="thin-rule" style="margin:6px auto"></div>
-
-      <div class="evento" id="r-evento"></div>
-
-      <div class="thin-rule" style="margin:8px auto"></div>
-
+      <div class="intro"   id="r-abertura"></div>
+      <div class="thin-rule"></div>
+      <div class="nome"    id="r-nome"></div>
+      <div class="cargo"   id="r-cargo"></div>
+      <div class="thin-rule"></div>
+      <div class="evento"  id="r-evento"></div>
+      <div class="thin-rule"></div>
       <div class="detalhes" id="r-detalhes"></div>
-
-      <div class="endereco" id="r-endereco" style="margin-top:6px"></div>
+      <div class="endereco" id="r-end"></div>
     </div>
   </div>
 </div>
 
 <script>
-function g(id){return document.getElementById(id)}
-
-function nl2br(str){return str.replace(/\n/g,'<br>')}
-
-function render(){
-  g('r-subsecao').innerHTML = g('f-subsecao').value.replace('Santana de Parnaíba','<br>Santana de Parnaíba');
-  g('r-comissao').innerHTML  = g('f-comissao').value.replace('das ','das<br>');
-  g('r-abertura').innerHTML  = nl2br(g('f-abertura').value);
-  g('r-nome').textContent    = g('f-nome').value;
-  g('r-cargo').innerHTML     = nl2br(g('f-cargo').value);
-  g('r-evento').textContent  = g('f-evento').value;
-  g('r-detalhes').innerHTML  = nl2br(g('f-detalhes').value);
-  g('r-endereco').textContent= g('f-endereco').value;
+/* =============================================
+   BORDA DE FLORZINHAS ROSAS — CANVAS
+   ============================================= */
+function flower(ctx, x, y, r, petals, pCol, cCol) {
+  // pétalas
+  for (let i = 0; i < petals; i++) {
+    const a = (i / petals) * Math.PI * 2;
+    const px = x + Math.cos(a) * r * 0.6;
+    const py = y + Math.sin(a) * r * 0.6;
+    ctx.beginPath();
+    ctx.ellipse(px, py, r * 0.42, r * 0.26, a, 0, Math.PI * 2);
+    ctx.fillStyle = pCol;
+    ctx.fill();
+  }
+  // miolo
+  ctx.beginPath();
+  ctx.arc(x, y, r * 0.26, 0, Math.PI * 2);
+  ctx.fillStyle = cCol;
+  ctx.fill();
 }
 
-/* ===== DOWNLOAD IMAGEM ===== */
-function baixarImg(){
-  html2canvas(g('convite'),{scale:2,useCORS:true,backgroundColor:'#f6f4ef'}).then(canvas=>{
-    const a=document.createElement('a');
-    a.download='convite_oab_dia_mulher.png';
-    a.href=canvas.toDataURL('image/png');
-    a.click();
+function leaf(ctx, x, y, size, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.beginPath();
+  ctx.ellipse(0, 0, size * 0.5, size * 0.18, 0, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(130,180,110,0.5)';
+  ctx.fill();
+  ctx.restore();
+}
+
+function bud(ctx, x, y, r, col) {
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = col; ctx.fill();
+  ctx.beginPath(); ctx.arc(x, y, r * 0.45, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff5f8'; ctx.fill();
+}
+
+function stem(ctx, x1, y1, x2, y2) {
+  ctx.beginPath();
+  ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+  ctx.strokeStyle = 'rgba(150,195,120,0.45)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
+
+function drawBorder() {
+  const cv  = document.getElementById('borderCanvas');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const m   = 16;   // margem da borda
+  const stp = 26;   // passo entre flores
+  const fR  = 8;    // raio flor grande
+  const bR  = 3.5;  // raio botão
+
+  // Cores
+  const P = ['#f2a8c4','#ee85ad','#e86898','#f5bdd4','#f9d0e2'];
+  const C = ['#fff0f6','#ffd0e8','#f8a0c0'];
+
+  // Distribuidor horizontal
+  function rowH(y, x0, x1) {
+    const n = Math.floor((x1 - x0) / stp);
+    for (let i = 0; i <= n; i++) {
+      const x = x0 + i * stp;
+      const phase = i % 5;
+      const px = x0 + (i + 0.5) * stp;
+      if (i < n) stem(ctx, x + fR + 1, y, x + stp - fR - 1, y);
+      if (phase === 0)      { flower(ctx, x, y, fR,     8, P[0], C[1]); }
+      else if (phase === 1) { leaf(ctx, x, y, 12, 0); bud(ctx, x, y, bR, P[3]); }
+      else if (phase === 2) { flower(ctx, x, y, fR - 1, 6, P[1], C[0]); }
+      else if (phase === 3) { leaf(ctx, x, y, 11, 0.2); bud(ctx, x, y, bR, P[4]); }
+      else                  { flower(ctx, x, y, fR,     8, P[2], C[2]); }
+    }
+  }
+
+  // Distribuidor vertical
+  function rowV(x, y0, y1) {
+    const n = Math.floor((y1 - y0) / stp);
+    for (let i = 0; i <= n; i++) {
+      const y = y0 + i * stp;
+      const phase = i % 5;
+      if (i < n) stem(ctx, x, y + fR + 1, x, y + stp - fR - 1);
+      if (phase === 0)      { flower(ctx, x, y, fR,     8, P[0], C[1]); }
+      else if (phase === 1) { leaf(ctx, x, y, 12, Math.PI/2); bud(ctx, x, y, bR, P[3]); }
+      else if (phase === 2) { flower(ctx, x, y, fR - 1, 6, P[1], C[0]); }
+      else if (phase === 3) { leaf(ctx, x, y, 11, Math.PI/2 + 0.2); bud(ctx, x, y, bR, P[4]); }
+      else                  { flower(ctx, x, y, fR,     8, P[2], C[2]); }
+    }
+  }
+
+  // Desenha as 4 faixas (deixa espaço para os cantos)
+  const corner = 38;
+  rowH(m + 4,     m + corner, W - m - corner);  // topo
+  rowH(H - m - 4, m + corner, W - m - corner);  // base
+  rowV(m + 4,     m + corner, H - m - corner);  // esquerda
+  rowV(W - m - 4, m + corner, H - m - corner);  // direita
+
+  // CANTOS — buquê de flores maior
+  const corners = [
+    { cx: m + 4,     cy: m + 4,     sx: 1,  sy: 1  },
+    { cx: W - m - 4, cy: m + 4,     sx: -1, sy: 1  },
+    { cx: m + 4,     cy: H - m - 4, sx: 1,  sy: -1 },
+    { cx: W - m - 4, cy: H - m - 4, sx: -1, sy: -1 },
+  ];
+
+  corners.forEach(({ cx, cy, sx, sy }) => {
+    // flor central grande
+    flower(ctx, cx, cy, fR + 4, 8, P[2], C[2]);
+    // flores ao redor
+    const around = [
+      { dx: 18, dy: 0,  r: fR,     p: P[0], c: C[1] },
+      { dx: 0,  dy: 18, r: fR,     p: P[1], c: C[0] },
+      { dx: 13, dy: 13, r: fR - 1, p: P[4], c: C[1] },
+      { dx: 22, dy: 10, r: fR - 2, p: P[3], c: C[2] },
+      { dx: 10, dy: 22, r: fR - 2, p: P[0], c: C[1] },
+    ];
+    around.forEach(o => {
+      flower(ctx, cx + o.dx * sx, cy + o.dy * sy, o.r, 6, o.p, o.c);
+    });
+    // folhas
+    leaf(ctx, cx + 14 * sx, cy + 4  * sy, 14, sx > 0 ? 0.3  : Math.PI - 0.3);
+    leaf(ctx, cx + 4  * sx, cy + 14 * sy, 14, sx > 0 ? 1.25 : Math.PI - 1.25);
+    leaf(ctx, cx + 18 * sx, cy + 18 * sy, 12, sx > 0 ? 0.78 : Math.PI - 0.78);
+    // botão extra
+    bud(ctx, cx + 26 * sx, cy + 6  * sy, bR, P[3]);
+    bud(ctx, cx + 6  * sx, cy + 26 * sy, bR, P[3]);
   });
 }
 
-/* ===== IMPRIMIR ===== */
-function imprimir(){
-  html2canvas(g('convite'),{scale:2,backgroundColor:'#f6f4ef'}).then(canvas=>{
-    const w=window.open('','_blank');
+/* =============================================
+   RENDER CAMPOS
+   ============================================= */
+const g = id => document.getElementById(id);
+const nl2br = s => s.replace(/\n/g, '<br>');
+
+function render() {
+  g('r-cidade').textContent = g('f-cidade').value;
+  g('r-sub').innerHTML      = g('f-sub').value;
+  g('r-com').innerHTML      = g('f-com').value;
+  g('r-abertura').innerHTML = nl2br(g('f-abertura').value);
+  g('r-nome').textContent   = g('f-nome').value;
+  g('r-cargo').innerHTML    = nl2br(g('f-cargo').value);
+  g('r-evento').textContent = g('f-evento').value;
+  g('r-detalhes').innerHTML = nl2br(g('f-detalhes').value);
+  g('r-end').textContent    = g('f-end').value;
+}
+
+/* =============================================
+   DOWNLOADS
+   ============================================= */
+function baixarImg() {
+  html2canvas(g('convite'), { scale: 2, useCORS: true, backgroundColor: '#fdfaf6' }).then(c => {
+    const a = document.createElement('a');
+    a.download = 'convite_oab.png'; a.href = c.toDataURL('image/png'); a.click();
+  });
+}
+
+function imprimir() {
+  html2canvas(g('convite'), { scale: 2, backgroundColor: '#fdfaf6' }).then(c => {
+    const w = window.open('', '_blank');
     w.document.write(`<html><head><title>Convite OAB</title>
-    <style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#fff}
-    img{max-width:100%;max-height:100vh}</style></head>
-    <body><img src="${canvas.toDataURL()}" onload="window.print()"></body></html>`);
+    <style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh}
+    img{max-width:100%}</style></head>
+    <body><img src="${c.toDataURL()}" onload="window.print()"></body></html>`);
     w.document.close();
   });
 }
 
-/* ===== DOWNLOAD WORD ===== */
-function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
 
-function para(text,opts){
-  opts=opts||{};
-  const sz=opts.sz||24;
-  const color=opts.color||'2A3540';
-  const bold=opts.bold?'<w:b/>':'';
-  const ital=opts.ital?'<w:i/>':'';
-  const before=opts.before!==undefined?opts.before:0;
-  const after=opts.after!==undefined?opts.after:120;
-  const align=opts.align||'center';
-  const spacing=opts.spacing?`<w:spacing w:val="${opts.spacing}"/>`:'';
-  const shade=opts.shade?`<w:shd w:val="clear" w:color="auto" w:fill="${opts.shade}"/>`:'';
-  const bdr=opts.bdrB?`<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="4" w:color="888888"/></w:pBdr>`:'';
-  const bdrT=opts.bdrT?`<w:pBdr><w:top w:val="single" w:sz="4" w:space="4" w:color="888888"/></w:pBdr>`:'';
-  // múltiplas linhas
-  const lines = text.split('\n');
-  const runs = lines.map((line,i)=>{
-    const br = i<lines.length-1?'<w:r><w:br/></w:r>':'';
-    return `<w:r><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:color w:val="${color}"/>${bold}${ital}${spacing}</w:rPr><w:t xml:space="preserve">${esc(line)}</w:t></w:r>${br}`;
+function para(text, o) {
+  o = o || {};
+  const sz = o.sz || 24, color = o.color || '2A3540';
+  const bold = o.bold ? '<w:b/>' : '', ital = o.ital ? '<w:i/>' : '';
+  const before = o.before !== undefined ? o.before : 0;
+  const after  = o.after  !== undefined ? o.after  : 120;
+  const shade  = o.shade  ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.shade}"/>` : '';
+  const runs = text.split('\n').map((line, i, arr) => {
+    const br = i < arr.length - 1 ? '<w:r><w:br/></w:r>' : '';
+    return `<w:r><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:color w:val="${color}"/>${bold}${ital}</w:rPr><w:t xml:space="preserve">${esc(line)}</w:t></w:r>${br}`;
   }).join('');
-  return `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="${before}" w:after="${after}"/>${shade}${bdr}${bdrT}</w:pPr>${runs}</w:p>`;
+  return `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="${before}" w:after="${after}"/>${shade}</w:pPr>${runs}</w:p>`;
 }
 
-function hrLine(){
-  return `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="60" w:after="60"/><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="AAAAAA"/></w:pBdr></w:pPr></w:p>`;
+function hr() {
+  return `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="60" w:after="60"/><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="D4799E"/></w:pBdr></w:pPr></w:p>`;
 }
 
-function sp(b,a){
-  b=b||0;a=a!==undefined?a:80;
-  return `<w:p><w:pPr><w:spacing w:before="${b}" w:after="${a}"/></w:pPr></w:p>`;
-}
-
-async function baixarWord(){
-  const btn=g('btnWord');
-  btn.disabled=true; btn.textContent='⏳ Gerando...';
-  try{
-    const d={
-      subsecao: g('f-subsecao').value,
-      comissao: g('f-comissao').value,
-      cidade: g('f-cidade-logo').value,
+async function baixarWord() {
+  const btn = g('btnWord');
+  btn.disabled = true; btn.textContent = '⏳ Gerando...';
+  try {
+    const d = {
+      sub:      g('f-sub').value,
+      com:      g('f-com').value,
+      cidade:   g('f-cidade').value,
       abertura: g('f-abertura').value,
-      nome: g('f-nome').value,
-      cargo: g('f-cargo').value,
-      evento: g('f-evento').value,
+      nome:     g('f-nome').value,
+      cargo:    g('f-cargo').value,
+      evento:   g('f-evento').value,
       detalhes: g('f-detalhes').value,
-      endereco: g('f-endereco').value,
+      end:      g('f-end').value,
     };
 
-    const docXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
 <w:body>
-${sp(200,80)}
-${para('OAB — '+d.cidade,{sz:18,color:'FFFFFF',bold:true,shade:'2A3540',before:80,after:80})}
-${para(d.subsecao,{sz:20,color:'2A3540',before:0,after:40})}
-${para(d.comissao,{sz:20,color:'2A3540',bold:true,before:0,after:80})}
-${hrLine()}
-${sp(60,60)}
-${para(d.abertura,{sz:24,color:'2A3540',ital:true,before:0,after:100})}
-${hrLine()}
-${para(d.nome,{sz:36,color:'111111',bold:true,before:100,after:100})}
-${hrLine()}
-${para(d.cargo,{sz:26,color:'2A3540',ital:true,before:80,after:80})}
-${hrLine()}
-${para(d.evento,{sz:36,color:'111111',bold:true,before:80,after:80})}
-${hrLine()}
-${sp(60,60)}
-${para(d.detalhes,{sz:22,color:'2A3540',before:0,after:80})}
-${hrLine()}
-${para(d.endereco,{sz:18,color:'666666',before:80,after:200})}
+<w:p><w:pPr><w:spacing w:before="160" w:after="0"/></w:pPr></w:p>
+${para('OAB — ' + d.cidade, { sz: 18, color: 'FFFFFF', bold: true, shade: '2A3540', before: 60, after: 80 })}
+${para(d.sub, { sz: 20, color: '2A3540', before: 0, after: 40 })}
+${para(d.com, { sz: 20, color: '2A3540', bold: true, before: 0, after: 80 })}
+${hr()}
+${para(d.abertura, { sz: 24, color: '2A3540', ital: true, before: 80, after: 100 })}
+${hr()}
+${para(d.nome, { sz: 36, color: '111111', bold: true, before: 100, after: 100 })}
+${hr()}
+${para(d.cargo, { sz: 26, color: '2A3540', ital: true, before: 80, after: 80 })}
+${hr()}
+${para(d.evento, { sz: 36, color: '111111', bold: true, before: 80, after: 80 })}
+${hr()}
+${para(d.detalhes, { sz: 22, color: '2A3540', before: 80, after: 80 })}
+${hr()}
+${para(d.end, { sz: 17, color: '666666', before: 60, after: 160 })}
 <w:sectPr>
   <w:pgSz w:w="17280" w:h="12240" w:orient="landscape"/>
   <w:pgMar w:top="720" w:right="900" w:bottom="720" w:left="900" w:header="0" w:footer="0"/>
   <w:pgBorders w:offsetFrom="page" w:zOrder="front">
-    <w:top    w:val="doubleWave" w:sz="18" w:space="20" w:color="1a1a1a"/>
-    <w:left   w:val="doubleWave" w:sz="18" w:space="20" w:color="1a1a1a"/>
-    <w:bottom w:val="doubleWave" w:sz="18" w:space="20" w:color="1a1a1a"/>
-    <w:right  w:val="doubleWave" w:sz="18" w:space="20" w:color="1a1a1a"/>
+    <w:top    w:val="floral" w:sz="24" w:space="20" w:color="D4799E"/>
+    <w:left   w:val="floral" w:sz="24" w:space="20" w:color="D4799E"/>
+    <w:bottom w:val="floral" w:sz="24" w:space="20" w:color="D4799E"/>
+    <w:right  w:val="floral" w:sz="24" w:space="20" w:color="D4799E"/>
   </w:pgBorders>
 </w:sectPr>
 </w:body></w:document>`;
 
-    const zip=new JSZip();
-    zip.file('[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>`);
-    zip.folder('_rels').file('.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`);
-    zip.folder('word').folder('_rels').file('document.xml.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/></Relationships>`);
-    zip.folder('word').file('settings.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:defaultTabStop w:val="720"/></w:settings>`);
-    zip.folder('word').file('styles.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>`);
-    zip.folder('word').file('document.xml',docXml);
+    const zip = new JSZip();
+    zip.file('[Content_Types].xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>`);
+    zip.folder('_rels').file('.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`);
+    zip.folder('word').folder('_rels').file('document.xml.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/></Relationships>`);
+    zip.folder('word').file('settings.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:defaultTabStop w:val="720"/></w:settings>`);
+    zip.folder('word').file('styles.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>`);
+    zip.folder('word').file('document.xml', doc);
 
-    const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url; a.download='convite_oab_dia_mulher.docx'; a.click();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
-  }catch(e){
-    alert('Erro ao gerar Word: '+e.message);
-  }
-  btn.disabled=false; btn.textContent='📄 Baixar Word (.docx)';
+    const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'convite_oab.docx'; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch(e) { alert('Erro: ' + e.message); }
+  btn.disabled = false; btn.textContent = '📄 Baixar Word (.docx)';
 }
 
 render();
+drawBorder();
 </script>
 </body>
 </html>
